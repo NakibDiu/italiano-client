@@ -1,14 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const {setShowMenu, showMenu} = props;
   return (
-    <nav className=" bg-gray-400 bg-opacity-40 w-[90%] my-4 px-6 py-2 flex justify-between items-center sticky top-0 rounded-xl">
+    <nav className=" bg-gray-400 bg-opacity-40 w-[90%] mt-4 px-6 py-2 flex justify-between items-center sticky top-5 rounded-xl">
       <img src={logo} alt="logo" className="h-[60px]" />
-      <AiOutlineMenu size={36} className="lg:hidden" />
+      <AiOutlineMenu size={36} className="lg:hidden cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
       <ul className="hidden lg:flex gap-4">
         <li className="text-base">
           <NavLink
