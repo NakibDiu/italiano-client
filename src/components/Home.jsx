@@ -1,9 +1,17 @@
-import React from 'react'
+import { useLoaderData } from "react-router-dom";
+import Chefs from "./Chefs/Chefs";
+import Header from "./Header";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  const chefsData = useLoaderData();
+  const chefs = chefsData.chefs;
 
-export default Home
+  return (
+    <div>
+      <Header />
+      <Chefs chefs={chefs} />
+    </div>
+  );
+};
+
+export default Home;

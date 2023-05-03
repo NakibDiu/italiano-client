@@ -5,6 +5,7 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
+const backendUrl = import.meta.env.VITE_BACKEND_URL
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
+        loader: async () => await fetch(backendUrl)
+        
       }
     ]
   },
