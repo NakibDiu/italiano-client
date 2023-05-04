@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
@@ -17,6 +18,10 @@ const githubProvider = new GithubAuthProvider();
 
 const signupUser = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
+};
+
+const loginUser = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
 const updateUser = (info) => {
@@ -32,12 +37,12 @@ const githubSignUp = () => {
 };
 
 const AuthProviders = ({ children }) => {
-
   const authInfo = {
     signupUser,
     updateUser,
     googleSignUp,
     githubSignUp,
+    loginUser,
   };
 
   return (

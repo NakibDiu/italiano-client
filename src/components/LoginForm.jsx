@@ -6,18 +6,14 @@ import Spinner from "../common/Spinner";
 
 const LoginForm = () => {
   const initialState = {
-    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    photoUrl: "",
   };
 
   const [formData, setFormData] = useState(initialState);
   const [isCreating, setIsCreating] = useState(false);
 
-  const { signupUser, updateUser, googleSignUp, githubSignUp } =
-    useContext(AuthContext);
+  const { loginUser, googleSignUp, githubSignUp } = useContext(AuthContext);
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -30,28 +26,16 @@ const LoginForm = () => {
     e.preventDefault();
     const errors = validateFormData();
     if (Object.keys(errors).length === 0) {
-      const { name, email, password, photoUrl } = formData;
+      const { email, password } = formData;
       setIsCreating(true);
       // Submit the form data
-      signupUser(email, password)
+      loginUser(email, password)
         .then((res) => {
-          if (name) {
-            const userInfo = {
-              displayName: name,
-              photoURL: photoUrl,
-            };
-            updateUser(userInfo)
-              .then((res) => {
-                toast.success("Account created successfully");
-                setIsCreating(false);
-                setFormData(initialState);
-                navigate("/login");
-                console.log(res);
-              })
-              .catch((err) => {
-                toast.error(err.message);
-              });
-          }
+            setIsCreating(false);
+            toast.success("login successful")
+            setFormData(initialState);
+            navigate("/");
+            console.log(res);
         })
         .catch((errors) => {
           toast.error(errors.message);
@@ -76,7 +60,7 @@ const LoginForm = () => {
     } else if (formData.password.length < 6) {
       errors.password = "Password must be at least 6 characters long";
     }
-    
+
     return errors;
   };
   // google sign up
@@ -86,10 +70,11 @@ const LoginForm = () => {
       .then((res) => {
         toast.success("Account created successfully");
         setIsCreating(false);
-        navigate("/login");
+        navigate("/");
       })
       .catch((err) => {
         toast.error(err.message);
+        setIsCreating(false)
       });
   };
   // github sign up
@@ -99,7 +84,7 @@ const LoginForm = () => {
       .then((res) => {
         toast.success("Account created successfully");
         setIsCreating(false);
-        navigate("/login");
+        navigate("/");
       })
       .catch((err) => {
         toast.error(err.message);

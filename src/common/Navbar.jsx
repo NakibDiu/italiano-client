@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const Navbar = ({ setShowMenu, showMenu }) => {
-  console.log(showMenu);
   return (
     <nav className=" bg-gray-400 bg-opacity-40 w-[90%] mt-4 mx-auto py-2 px-6 flex justify-between items-center sticky top-5 rounded-xl">
       <img src={logo} alt="logo" className="h-[60px]" />
