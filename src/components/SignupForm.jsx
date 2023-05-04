@@ -13,7 +13,7 @@ const SignupForm = () => {
 
   const [formData, setFormData] = useState(initialState);
 
-  const { signupUser, updateUser } = useContext(AuthContext);
+  const { signupUser, updateUser, googleSignUp } = useContext(AuthContext);
 
   const [errors, setErrors] = useState({});
 
@@ -79,6 +79,17 @@ const SignupForm = () => {
     }
 
     return errors;
+  };
+
+  const handleGoogleSignUp = () => {
+    googleSignUp()
+      .then((res) => {
+        toast.success("Account created successfully");
+        console.log(res.user);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   return (
@@ -196,7 +207,10 @@ const SignupForm = () => {
         </div>
         <h3 className="text-lg lg:text-xl text-center py-4">Or</h3>
         <div className="flex items-center justify-center gap-7">
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={handleGoogleSignUp}
+          >
             Google
           </button>
           <button className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
