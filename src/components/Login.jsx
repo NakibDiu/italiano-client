@@ -1,9 +1,29 @@
-import React from 'react'
+import Lottie from "lottie-react";
+import Navbar from "../common/Navbar";
+import signupLottie from "../assets/signupLottie.json";
+import SignupForm from "./SignupForm";
+import { useState } from "react";
+import MenuCard from "../common/MenuCard";
+import LoginForm from "./LoginForm";
 
 const Login = () => {
+  const [showMenu, setShowMenu] = useState(false);
   return (
-    <div>Login</div>
-  )
-}
+    <div className="">
+      <Navbar setShowMenu={setShowMenu} showMenu={showMenu} />
+        {showMenu && <MenuCard  setShowMenu={setShowMenu} showMenu={showMenu}/>}
+      <div className="container mx-auto bg-slate-100 flex flex-col lg:flex-row justify-between items-center my-10 lg:my-14">
+        <Lottie
+          animationData={signupLottie}
+          loop={true}
+          className="hidden lg:block lg:basis-1/2"
+        />
+        <div className="lg:basis-1/2 px-5">
+          <LoginForm />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Login
+export default Login;
