@@ -5,7 +5,10 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
-const backendUrl = import.meta.env.VITE_BACKEND_URL
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import AuthProviders from "./providers/AuthProviders";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const router = createBrowserRouter([
   {
@@ -15,15 +18,24 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: async () => await fetch(backendUrl)
-        
-      }
-    ]
+        loader: async () => await fetch(backendUrl),
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+    ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProviders>
+      <RouterProvider router={router} />
+    </AuthProviders>
   </React.StrictMode>
 );

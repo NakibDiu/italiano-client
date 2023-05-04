@@ -1,7 +1,6 @@
 import React from "react";
 
 const Chefs = ({ chefs }) => {
-  console.log(chefs[3]);
   return (
     <div className="py-10 lg:py-28 px-6 lg:px-8 space-y-11 lg:space-y-20">
       <div className="space-y-3">
@@ -39,7 +38,7 @@ const Chefs = ({ chefs }) => {
                     0,
                     100
                   )}....`}</p>
-                  <button className="bg-[#23A6F0] text-white py-2 px-4 rounded-full uppercase tracking-wider font-semibold hover:bg-[#4187af] hover:text-white transition duration-300">
+                  <button className="bg-[#23A6F0] text-white py-2 px-4 rounded-lg uppercase tracking-wider font-semibold hover:bg-[#4187af] hover:text-white transition duration-300">
                     View Recipes
                   </button>
                 </div>

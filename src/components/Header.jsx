@@ -12,7 +12,7 @@ const Header = () => {
         <Navbar setShowMenu={setShowMenu} showMenu={showMenu} />
         {showMenu && <MenuCard  setShowMenu={setShowMenu} showMenu={showMenu}/>}
         <div className="flex flex-col h-full w-full lg:justify-evenly justify-around items-center">
-          <h3 className="text-base lg:text-lg text-white font-bold">Una fetta dItalia</h3>
+          <h3 className="text-xl lg:text-2xl text-white font-bold">Una fetta dItalia</h3>
           <div className="space-y-6 mt-4 flex flex-col items-center animate-pulse">
             <h1 className="text-4xl sm:text-6xl lg:text-8xl text-white text-center">
               A Slice of Italy
