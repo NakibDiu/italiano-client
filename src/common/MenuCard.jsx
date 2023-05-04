@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const MenuCard = ({ setShowMenu, showMenu }) => {
   return (
-    <div className="bg-gray-400 bg-opacity-40 w-[90%] border-t-2 flex justify-end">
+    <div className="bg-gray-400 bg-opacity-40 w-[90%] border-t-2 flex justify-end mx-auto">
       <ul className="px-2 py-4 space-y-3">
         <li className="text-2xl font-medium text-white">
           <NavLink

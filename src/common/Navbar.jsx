@@ -4,15 +4,18 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 
-
-const Navbar = (props) => {
-  const {setShowMenu, showMenu} = props;
+const Navbar = ({ setShowMenu, showMenu }) => {
+  console.log(showMenu);
   return (
     <nav className=" bg-gray-400 bg-opacity-40 w-[90%] mt-4 mx-auto py-2 px-6 flex justify-between items-center sticky top-5 rounded-xl">
       <img src={logo} alt="logo" className="h-[60px]" />
-      <AiOutlineMenu size={36} className="lg:hidden cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
+      <AiOutlineMenu
+        size={36}
+        className="lg:hidden cursor-pointer"
+        onClick={() => setShowMenu(!showMenu)}
+      />
       <ul className="hidden lg:flex gap-4">
-        <li className="text-base">
+        <li className="text-2xl font-medium">
           <NavLink
             to="/"
             className={({ isActive }) =>

@@ -13,7 +13,7 @@ const SignupForm = () => {
 
   const [formData, setFormData] = useState(initialState);
 
-  const { signupUser } = useContext(AuthContext);
+  const { signupUser, updateUser } = useContext(AuthContext);
 
   const [errors, setErrors] = useState({});
 
@@ -29,9 +29,21 @@ const SignupForm = () => {
       // Submit the form data
       signupUser(email, password)
         .then((res) => {
-          const newUser = res.user;
-          toast.success("user created successfully");
-          setFormData(initialState);
+          if (name) {
+            const userInfo = {
+              displayName: name,
+              photoURL: photoUrl,
+            };
+            updateUser(userInfo)
+              .then((res) => {
+                toast.success("Account created successfully");
+                setFormData(initialState);
+                console.log(res);
+              })
+              .catch((err) => {
+                toast.error(err.message);
+              });
+          }
           console.log(res);
         })
         .catch((errors) => {
