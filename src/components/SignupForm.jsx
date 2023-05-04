@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 import { toast } from "react-toast";
+import { NavLink, useNavigate } from "react-router-dom";
+import Spinner from "../common/Spinner";
 
 const SignupForm = () => {
   const initialState = {
@@ -12,10 +14,13 @@ const SignupForm = () => {
   };
 
   const [formData, setFormData] = useState(initialState);
+  const [isCreating, setIsCreating] = useState(false);
 
-  const { signupUser, updateUser, googleSignUp } = useContext(AuthContext);
+  const { signupUser, updateUser, googleSignUp, githubSignUp } =
+    useContext(AuthContext);
 
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,6 +31,7 @@ const SignupForm = () => {
     const errors = validateFormData();
     if (Object.keys(errors).length === 0) {
       const { name, email, password, photoUrl } = formData;
+      setIsCreating(true);
       // Submit the form data
       signupUser(email, password)
         .then((res) => {
@@ -37,14 +43,15 @@ const SignupForm = () => {
             updateUser(userInfo)
               .then((res) => {
                 toast.success("Account created successfully");
+                setIsCreating(false);
                 setFormData(initialState);
+                navigate("/login");
                 console.log(res);
               })
               .catch((err) => {
                 toast.error(err.message);
               });
           }
-          console.log(res);
         })
         .catch((errors) => {
           toast.error(errors.message);
@@ -80,12 +87,27 @@ const SignupForm = () => {
 
     return errors;
   };
-
+  // google sign up
   const handleGoogleSignUp = () => {
+    setIsCreating(true);
     googleSignUp()
       .then((res) => {
         toast.success("Account created successfully");
-        console.log(res.user);
+        setIsCreating(false);
+        navigate("/login");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+  // github sign up
+  const handleGithubSignUp = () => {
+    setIsCreating(true);
+    githubSignUp()
+      .then((res) => {
+        toast.success("Account created successfully");
+        setIsCreating(false);
+        navigate("/login");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -202,22 +224,28 @@ const SignupForm = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
             type="submit"
           >
-            Sign Up
+            {isCreating ? <Spinner /> : "Sign Up"}
           </button>
         </div>
         <h3 className="text-lg lg:text-xl text-center py-4">Or</h3>
-        <div className="flex items-center justify-center gap-7">
-          <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={handleGoogleSignUp}
-          >
-            Google
-          </button>
-          <button className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            GitHub
-          </button>
-        </div>
       </form>
+      <div className="flex items-center justify-center gap-7">
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={handleGoogleSignUp}
+        >
+          {isCreating ? <Spinner /> : "Google"}
+        </button>
+        <button
+          className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={handleGithubSignUp}
+        >
+          {isCreating ? <Spinner /> : "Github"}
+        </button>
+      </div>
+      <p className="text-center py-3 text-base lg:text-lg text-gray-700">
+        Already have an account ? <NavLink to="/login" className="text-blue-500 font-bold">Log in</NavLink>
+      </p>
     </div>
   );
 };
