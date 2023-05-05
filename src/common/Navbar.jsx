@@ -28,7 +28,7 @@ const Navbar = ({ setShowMenu, showMenu }) => {
   };
 
   return (
-    <nav className=" bg-gray-400 bg-opacity-40 w-[90%] mt-4 mx-auto py-2 px-6 flex justify-between items-center sticky top-5 rounded-xl">
+    <nav className=" bg-gray-400 bg-opacity-40 w-[90%] mt-4 mx-auto py-2 px-6 flex justify-between items-center sticky top-5 rounded-xl z-50">
       <img src={logo} alt="logo" className="h-[60px]" />
       <AiOutlineMenu
         size={36}
@@ -71,7 +71,7 @@ const Navbar = ({ setShowMenu, showMenu }) => {
                   <img src={photoUrl} alt="" />
                 </div>
               ) : (
-                <p className="text-base font-bold text-white">{userName}</p>
+                <p className="text-2xl font-bold text-white">{userName}</p>
               )}
             </li>
             <button

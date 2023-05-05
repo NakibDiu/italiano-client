@@ -8,12 +8,15 @@ import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import AuthProviders from "./providers/AuthProviders";
+import Recipes from "./components/Recipes";
+import ErrorPage from "./components/ErrorPage";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: < ErrorPage />,
     children: [
       {
         path: "/",
@@ -27,6 +30,11 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/:id/recipes",
+        element: <Recipes />,
+        loader: async ({ params }) => await fetch(`${backendUrl}${params.id}/recipes`),
       },
     ],
   },

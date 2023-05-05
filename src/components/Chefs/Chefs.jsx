@@ -1,6 +1,7 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Chefs = ({ chefs }) => {
+  const navigate = useNavigate()
   return (
     <div className="py-10 lg:py-28 px-6 lg:px-8 space-y-11 lg:space-y-20">
       <div className="space-y-3">
@@ -14,18 +15,12 @@ const Chefs = ({ chefs }) => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {chefs.map((chef, index) => {
+        {chefs.map((chef) => {
           const { id, name, description, image } = chef;
-          let imageUrl = "";
-          if (index < 3) {
-            imageUrl = chef?.images?.small;
-          } else {
-            imageUrl = image?.small;
-          }
           return (
             <div className="relative" key={id}>
               <img
-                src={imageUrl}
+                src={image.small}
                 alt={name}
                 loading="lazy"
                 className="h-[452px] w-full rounded-xl"
@@ -34,13 +29,14 @@ const Chefs = ({ chefs }) => {
               <div className="absolute inset-0 flex items-end">
                 <div className="text-white z-10 px-6 py-7 space-y-4">
                   <h3 className="text-2xl font-bold">{name}</h3>
-                  <p className="text-sm leading-6 text-white">{`${description.substring(
+                  <p className="text-sm leading-6 text-white mb-2">{`${description.substring(
                     0,
                     100
                   )}....`}</p>
-                  <button className="bg-[#23A6F0] text-white py-2 px-4 rounded-lg uppercase tracking-wider font-semibold hover:bg-[#4187af] hover:text-white transition duration-300">
-                    View Recipes
-                  </button>
+
+                    <button className="bg-[#23A6F0] text-white py-2 px-4 rounded-lg uppercase tracking-wider font-semibold hover:bg-[#4187af] hover:text-white transition duration-300 cursor-pointer" onClick={() => navigate(`/${id}/recipes`)}>
+                      View Recipes
+                    </button>
                 </div>
               </div>
             </div>
