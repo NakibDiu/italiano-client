@@ -3,6 +3,7 @@ import { useLoaderData, useParams } from "react-router-dom";
 import Spinner from "../common/Spinner";
 import Navbar from "../common/Navbar";
 import MenuCard from "../common/MenuCard";
+import RecipeCard from "./RecipeCard";
 
 const Recipes = () => {
   const recipes = useLoaderData();
@@ -25,8 +26,6 @@ const Recipes = () => {
     fetchChefs();
   }, []);
 
-  console.log(chef);
-
   if (loading) {
     return (
       <div className="w-full h-screen flex justify-center items-center">
@@ -40,15 +39,23 @@ const Recipes = () => {
       {/* header */}
       <Navbar showMenu={showMenu} setShowMenu={setShowMenu} />
       {showMenu && <MenuCard showMenu={showMenu} setShowMenu={setShowMenu} />}
-      <div className="relative w-full min-h-screen my-6">
+      <div className=" w-full my-6 bg-green-400 relative">
         <img
           src={chef?.image.large}
-          alt=""
-          className="bg-gray-100 lg:bg-opacity-5 absolute inset-0 object-cover lg:object-contain w-full h-1/2"
+          alt="chef poster image"
+          className="bg-gray-100 lg:bg-opacity-5 opacity-85  object-cover lg:object-contain w-full min-h-[250px]"
         />
+        <div className="absolute inset-0 flex flex-col items-left text-white justify-end lg:justify-center gap-4 px-4 py-4 lg:w-1/2">
+          <h1 className="text-2xl lg:text-3xl font-extrabold">{chef?.name}</h1>
+          <p className="text-sm lg:text-base leading-tight">
+            {chef?.description}
+          </p>
+        </div>
       </div>
-      <div className="grid lg:grid-cols-2">
-
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6 lg:gap-6">
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.id} recipe={recipe} />
+        ))}
       </div>
     </div>
   );
