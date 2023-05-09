@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import AuthProviders from "./providers/AuthProviders";
 import Recipes from "./components/Recipes";
 import ErrorPage from "./components/ErrorPage";
+import Blogs from "./components/Blogs";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
       },
       {
         path: "/:id/recipes",
