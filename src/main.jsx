@@ -11,6 +11,7 @@ import AuthProviders from "./providers/AuthProviders";
 import Recipes from "./components/Recipes";
 import ErrorPage from "./components/ErrorPage";
 import Blogs from "./components/Blogs";
+import PrivateRoutes from "./components/PrivateRoutes";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const router = createBrowserRouter([
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/:id/recipes",
-        element: <Recipes />,
+        element: <PrivateRoutes><Recipes /></PrivateRoutes> ,
         loader: async ({ params }) => await fetch(`${backendUrl}${params.id}/recipes`),
       },
     ],
