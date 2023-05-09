@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
 import Spinner from "./Spinner";
 import { toast } from "react-toast";
+import LazyLoad from "react-lazy-load";
 
 const MenuCard = ({ setShowMenu, showMenu }) => {
   const { user, loading, logOut } = useContext(AuthContext);
@@ -10,7 +11,7 @@ const MenuCard = ({ setShowMenu, showMenu }) => {
   const photoUrl = user?.photoURL;
   const userName = user?.displayName || "no name set";
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logOut()
@@ -82,11 +83,13 @@ const MenuCard = ({ setShowMenu, showMenu }) => {
                   className="h-10 w-10 bg-gray-300 rounded-full cursor-pointer"
                   title={userName}
                 >
-                  <img
-                    src={photoUrl}
-                    className="h-10 w-10 rounded-full cursor-pointer"
-                    alt={userName}
-                  />
+                  <LazyLoad height={10}>
+                    <img
+                      src={photoUrl}
+                      className="h-10 w-10 rounded-full cursor-pointer"
+                      alt={userName}
+                    />
+                  </LazyLoad>
                 </div>
               )}
               {!photoUrl && (

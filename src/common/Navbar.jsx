@@ -6,13 +6,14 @@ import logo from "../assets/logo.png";
 import { AuthContext } from "../providers/AuthProviders";
 import Spinner from "./Spinner";
 import { toast } from "react-toast";
+import LazyLoad from "react-lazy-load";
 
 const Navbar = ({ setShowMenu, showMenu }) => {
   const { loading, user, logOut } = useContext(AuthContext);
 
   const photoUrl = user?.photoURL;
   const userName = user?.displayName;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   console.log(photoUrl);
 
@@ -29,7 +30,9 @@ const Navbar = ({ setShowMenu, showMenu }) => {
 
   return (
     <nav className=" bg-gray-400 bg-opacity-40 w-[90%] mt-4 mx-auto py-2 px-6 flex justify-between items-center sticky top-5 rounded-xl z-50">
-      <img src={logo} alt="logo" className="h-[60px]" />
+      <LazyLoad height={"fit-content"}>
+        <img src={logo} alt="logo" className="h-[60px]" />
+      </LazyLoad>
       <AiOutlineMenu
         size={36}
         className="lg:hidden cursor-pointer"
@@ -68,7 +71,9 @@ const Navbar = ({ setShowMenu, showMenu }) => {
                   className="w-10 h-10 bg-gray-400 rounded-full"
                   title={userName}
                 >
-                  <img src={photoUrl} alt="" />
+                  <LazyLoad height={10}>
+                    <img src={photoUrl} alt="" />
+                  </LazyLoad>
                 </div>
               ) : (
                 <p className="text-2xl font-bold text-white">{userName}</p>

@@ -1,4 +1,5 @@
 import React from "react";
+import LazyLoad from "react-lazy-load";
 
 const RecipeCard = ({ recipe, handleAddToFavorite }) => {
   const {
@@ -13,7 +14,9 @@ const RecipeCard = ({ recipe, handleAddToFavorite }) => {
 
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl flex flex-col">
-      <img className="h-48 w-full object-cover" src={image} alt={name} />
+      <LazyLoad height={"192px"}>
+        <img className="h-48 w-full object-cover" src={image} alt={name} />
+      </LazyLoad>
       <div className="p-6 flex-grow">
         <div className="flex items-baseline">
           <span className="inline-block bg-green-200 text-green-800 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">
@@ -34,7 +37,10 @@ const RecipeCard = ({ recipe, handleAddToFavorite }) => {
           ))}
         </ul>
       </div>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={() => handleAddToFavorite(recipe_id)}>
+      <button
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        onClick={() => handleAddToFavorite(recipe_id)}
+      >
         Add to Favorites
       </button>
     </div>
