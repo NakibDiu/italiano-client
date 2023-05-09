@@ -1,6 +1,6 @@
 import React from "react";
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, handleAddToFavorite }) => {
   const {
     chef_id,
     cooking_method,
@@ -34,7 +34,7 @@ const RecipeCard = ({ recipe }) => {
           ))}
         </ul>
       </div>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+      <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={() => handleAddToFavorite(recipe_id)}>
         Add to Favorites
       </button>
     </div>

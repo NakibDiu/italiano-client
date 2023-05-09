@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import Chefs from "./Chefs/Chefs";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Home = () => {
   const chefsData = useLoaderData();
@@ -10,6 +11,7 @@ const Home = () => {
     <div>
       <Header />
       <Chefs chefs={chefs} />
+      <Footer />
     </div>
   );
 };

@@ -4,6 +4,8 @@ import Spinner from "../common/Spinner";
 import Navbar from "../common/Navbar";
 import MenuCard from "../common/MenuCard";
 import RecipeCard from "./RecipeCard";
+import { toast } from "react-toast";
+import Footer from "./Footer";
 
 const Recipes = () => {
   const recipes = useLoaderData();
@@ -25,6 +27,11 @@ const Recipes = () => {
     };
     fetchChefs();
   }, []);
+
+  const handleAddToFavorite = (id) => {
+    console.log(id);
+    toast.success("Recipe added to favorites");
+  }
 
   if (loading) {
     return (
@@ -54,9 +61,10 @@ const Recipes = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6 lg:gap-6">
         {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+          <RecipeCard key={recipe.id} recipe={recipe} handleAddToFavorite={handleAddToFavorite} />
         ))}
       </div>
+      <Footer />
     </div>
   );
 };
